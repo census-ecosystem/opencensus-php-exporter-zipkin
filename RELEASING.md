@@ -6,6 +6,6 @@ The PHP library and extension are released independently of each other.
 
 1. Create a GitHub release.
 
-1. Click `Update` from the admin view of the [opencensus/opencensus-exporter-jaeger][packagist] package.
+1. Click `Update` from the admin view of the [opencensus/opencensus-exporter-zipkin][packagist] package.
 
-[packagist]: https://packagist.org/packages/opencensus/opencensus
+[packagist]: https://packagist.org/packages/opencensus/opencensus-exporter-zipkin
