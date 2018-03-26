@@ -1,11 +1,10 @@
 {
-    "name": "opencensus/opencensus-exporter-jaeger",
-    "description": "OpenCensus Jaeger Exporter for PHP",
+    "name": "opencensus/opencensus-exporter-zipkin",
+    "description": "OpenCensus Zipkin Exporter for PHP",
     "type": "library",
     "require": {
         "php": ">=5.6",
-        "opencensus/opencensus": "^0.2",
-        "apache/thrift": "^0.11"
+        "opencensus/opencensus": "^0.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.0",
