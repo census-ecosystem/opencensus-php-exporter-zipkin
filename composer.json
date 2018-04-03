@@ -7,8 +7,8 @@
         "opencensus/opencensus": "^0.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.0",
-        "squizlabs/php_codesniffer": "2.*",
+        "phpunit/phpunit": "^6.0",
+        "squizlabs/php_codesniffer": "2.*"
     },
     "license": "Apache-2.0",
     "authors": [
