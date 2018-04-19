@@ -7,7 +7,7 @@
         "opencensus/opencensus": "~0.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.0",
+        "phpunit/phpunit": "^5.0",
         "squizlabs/php_codesniffer": "2.*",
         "guzzlehttp/guzzle": "~6.0"
     },
