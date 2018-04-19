@@ -47,27 +47,10 @@ jobs:
       - image: circleci/php:7.2-node
     steps:
       - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "composer.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: composer install -n --prefer-dist
-
-      - save_cache:
-          paths:
-            - ./vendor
-          key: v1-dependencies-{{ checksum "composer.json" }}
-
-      - setup_remote_docker:
-          docker_layer_caching: true
-
       - run: docker network create -d bridge nw_zipkin
       - run: docker run -d -p9411:9411 --name=zipkin-server --network=nw_zipkin openzipkin/zipkin:2.7
-      - run: ZIPKIN_HOST=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' zipkin-server) vendor/bin/phpunit --config=./phpunit-integration.xml.dist
+      - run: docker build -t integration-test .
+      - run: docker run --network=nw_zipkin -e ZIPKIN_HOST=zipkin-server integration-test vendor/bin/phpunit --config=./phpunit-integration.xml.dist
 
 workflows:
   version: 2
