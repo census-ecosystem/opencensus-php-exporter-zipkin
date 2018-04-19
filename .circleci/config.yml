@@ -47,6 +47,10 @@ jobs:
       - image: circleci/php:7.2-node
     steps:
       - checkout
+
+      - setup_remote_docker:
+          docker_layer_caching: true
+
       - run: docker network create -d bridge nw_zipkin
       - run: docker run -d -p9411:9411 --name=zipkin-server --network=nw_zipkin openzipkin/zipkin:2.7
       - run: docker build -t integration-test .
