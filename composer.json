@@ -23,5 +23,8 @@
         "psr-4": {
             "OpenCensus\\Trace\\Exporter\\": "src/"
         }
+    },
+    "scripts": {
+        "tests": "scripts/run_local_tests.sh"
     }
 }
