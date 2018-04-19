@@ -3,9 +3,8 @@
 This library provides an [`ExporterInterface`][exporter-interface] for exporting
 Trace data to a Zipkin instance.
 
-[![CircleCI](https://circleci.com/gh/census-instrumentation/opencensus-php-exporter-zipkin.svg?style=svg)](https://circleci.com/gh/census-instrumentation/opencensus-php-exporter-zipkin)
-[![Packagist](https://img.shields.io/packagist/v/opencensus/opencensus-exporter-zipkin.svg)](https://packagist.org/packages/opencensus/opencensus)
-![PHP-Version](https://img.shields.io/packagist/php-v/opencensus/opencensus-exporter-zipkin.svg)
+[![CircleCI](https://circleci.com/gh/census-instrumentation/opencensus-php-exporter-zipkin.svg?style=svg)][ci-build]
+[![Packagist](https://img.shields.io/packagist/v/opencensus/opencensus-exporter-zipkin.svg)][packagist-package]![PHP-Version](https://img.shields.io/packagist/php-v/opencensus/opencensus-exporter-zipkin.svg)
 
 ## Installation & basic usage
 
@@ -26,11 +25,37 @@ Trace data to a Zipkin instance.
 
 ## Customization
 
-TODO: Fill out these instructions
+### Configuring the Zipkin endpoint
+
+You may provide an optional initialization parameter for the Zipkin endpoint.
+This value should be a full URL to the v2 spans endpoint.
+
+```php
+$exporter = new ZipkinExporter('my-service-name', 'http://example.com:9411/api/v2/spans');
+```
+
+### Configuring the local IPv4 or IPv6 address
+
+Zipkin allows you to optionally specify the host IP address of the server that
+is handling the traced requests.
+
+For IPv4:
+
+```php
+// gethostbyname may make a DNS query, so you may want to cache this
+$ipv4 = gethostbyname(gethostname());
+$exporter->setLocalIpv4($ipv4);
+```
+
+Similarly, you may set the local IPv6 address if you can obtain it:
+
+```php
+$exporter->setLocalIpv6($ipv6);
+```
 
 ## Versioning
 
-[![Packagist](https://img.shields.io/packagist/v/opencensus/opencensus-exporter-zipkin.svg)](https://packagist.org/packages/opencensus/opencensus-exporter-zipkin)
+[![Packagist](https://img.shields.io/packagist/v/opencensus/opencensus-exporter-zipkin.svg)][packagist-package]
 
 This library follows [Semantic Versioning][semver].
 
@@ -73,3 +98,5 @@ This is not an official Google product.
 [census-org]: https://github.com/census-instrumentation
 [composer]: https://getcomposer.org/
 [semver]: http://semver.org/
+[ci-build]: https://circleci.com/gh/census-instrumentation/opencensus-php-exporter-zipkin
+[packagist-package]: https://packagist.org/packages/opencensus/opencensus-exporter-zipkin
