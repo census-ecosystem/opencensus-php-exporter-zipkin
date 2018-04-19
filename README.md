@@ -4,7 +4,8 @@ This library provides an [`ExporterInterface`][exporter-interface] for exporting
 Trace data to a Zipkin instance.
 
 [![CircleCI](https://circleci.com/gh/census-instrumentation/opencensus-php-exporter-zipkin.svg?style=svg)][ci-build]
-[![Packagist](https://img.shields.io/packagist/v/opencensus/opencensus-exporter-zipkin.svg)][packagist-package]![PHP-Version](https://img.shields.io/packagist/php-v/opencensus/opencensus-exporter-zipkin.svg)
+[![Packagist](https://img.shields.io/packagist/v/opencensus/opencensus-exporter-zipkin.svg)][packagist-package]
+![PHP-Version](https://img.shields.io/packagist/php-v/opencensus/opencensus-exporter-zipkin.svg)
 
 ## Installation & basic usage
 

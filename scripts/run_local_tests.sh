@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 # Copyright 2018 OpenCensus Authors
 #
