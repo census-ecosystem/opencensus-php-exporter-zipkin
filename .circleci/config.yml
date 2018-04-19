@@ -21,7 +21,8 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
 
       # run tests!
-      - run: phpunit
+      - run: vendor/bin/phpcs --standard=./phpcs-ruleset.xml
+      - run: vendor/bin/phpunit
   php71:
     docker:
       - image: circleci/php:7.1-node
@@ -43,7 +44,8 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
 
       # run tests!
-      - run: phpunit
+      - run: vendor/bin/phpcs --standard=./phpcs-ruleset.xml
+      - run: vendor/bin/phpunit
 
 workflows:
   version: 2
