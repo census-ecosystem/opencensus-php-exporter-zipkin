@@ -67,8 +67,7 @@ jobs:
 
       - run: docker network create -d bridge nw_zipkin
       - run: docker run -d -p9411:9411 --name=zipkin-server --network=nw_zipkin openzipkin/zipkin:2.7
-      - run: docker ps
-      - run: ZIPKIN_HOST=zipkin-server vendor/bin/phpunit --config=./phpunit-integration.xml.dist
+      - run: ZIPKIN_HOST=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' zipkin-server) vendor/bin/phpunit --config=./phpunit-integration.xml.dist
 
 workflows:
   version: 2
