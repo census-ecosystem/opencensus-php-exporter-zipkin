@@ -64,3 +64,4 @@ workflows:
       - php70
       - php71
       - php72
+      - integration
