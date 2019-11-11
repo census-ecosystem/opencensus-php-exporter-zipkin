@@ -56,24 +56,46 @@ class ZipkinExporter implements ExporterInterface
     private $localEndpoint;
 
     /**
+    * @var array
+    */
+    private $defaultAttributes;
+
+    /**
+     * string
+     */
+    private $accessToken
+
+    /**
      * Create a new ZipkinExporter
      *
      * @param string $name The name of this application
+     * @param string $accessToken The access token for LightStep
      * @param string $endpointUrl (optional) The url for the span reporting
      *        endpoint. **Defaults to** `http://localhost:9411/api/v2/spans`
+     * @param array $defaultAttributes(optional) A set of of default tags to be
+     *        applied to all spans.
      * @param array $server (optional) The server array to search for the
      *        SERVER_PORT. **Defaults to** $_SERVER
      */
-    public function __construct($name, $endpointUrl = null, array $server = null)
+    public function __construct($name, $accesToken, $endpointUrl = null, array $defaultAttributes= null, array $server = null)
     {
         $server = $server ?: $_SERVER;
+        $this->accesToken = $accesToken;
         $this->endpointUrl = ($endpointUrl === null) ? self::DEFAULT_ENDPOINT : $endpointUrl;
         $this->localEndpoint = [
             'serviceName' => $name
         ];
+
         if (array_key_exists('SERVER_PORT', $server)) {
             $this->localEndpoint['port'] = intval($server['SERVER_PORT']);
         }
+
+        $this->defaultAttributes= [
+          'lightstep.hostname' => gethostname(),
+          'lightstep.tracer_platform_version' => phpversion()
+        ];
+
+        $this->defaultAttributes= array_merge($this->defaultAttributes, $defaultAttributes);
     }
 
     /**
@@ -161,7 +183,9 @@ class ZipkinExporter implements ExporterInterface
                 : null;
             $traceId = str_pad($span->traceId(), 32, '0', STR_PAD_LEFT);
 
-            $attributes = $span->attributes();
+            $attributes = array_merge($this->defaultAttributes, $span->attributes());
+            $attributes['lightstep.access_token'] = $this->accessToken
+
             if (empty($attributes)) {
                 // force json_encode to render an empty object ("{}") instead of an empty array ("[]")
                 $attributes = new \stdClass();
